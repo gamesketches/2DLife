@@ -22,12 +22,15 @@ public class PlatformerMovement : MonoBehaviour {
 		if(GravityY) {
 			Vector3 moveVector = (vert * Camera.main.transform.forward * Time.deltaTime * 2f + Physics.gravity);
 			controller.Move(moveVector + jumpVector);
-			if(Input.GetKeyDown(KeyCode.Space) && jumpVector.y <= 0) {
-				jumpVector.y = jumpSpeed;
-				//Debug.Log(jumpVector.y);
-			}
+			Debug.Log(jumpVector);
 			if(!controller.isGrounded) {
 				jumpVector.y -= 1f * Time.deltaTime;
+			}
+			else {
+				jumpVector.y = 0f;
+			}
+			if(Input.GetKeyDown(KeyCode.Space) && jumpVector.y <= 0) {
+				jumpVector.y = jumpSpeed;
 			}
 		}
 		else {
