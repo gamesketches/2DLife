@@ -14,6 +14,14 @@ public class PlatformerMovement : MonoBehaviour {
 	void Start () {
 		controller = GetComponent<CharacterController>();
 		movement = 0;
+		if(!GravityY) {
+			/*Vector3 newPosition = new Vector3(gameObject.transform.position.x,
+										gameObject.transform.position.y + 7f,
+										gameObject.transform.position.z);
+
+			gameObject.transform.position = newPosition;*/
+			gameObject.transform.Rotate(-34f, 0f, -90f);
+		}
 	}
 	
 	// Update is called once per frame
@@ -26,7 +34,6 @@ public class PlatformerMovement : MonoBehaviour {
 			Vector3 moveVector = (vert * Camera.main.transform.forward * Time.deltaTime * 2f + Physics.gravity);
 			controller.Move(moveVector + jumpVector);
 			movement+= moveVector.z;
-			Debug.Log(jumpVector);
 			if(!controller.isGrounded) {
 				jumpVector.y -= 1f * Time.deltaTime;
 			}
@@ -38,14 +45,17 @@ public class PlatformerMovement : MonoBehaviour {
 			}
 		}
 		else {
-			controller.Move(transform.forward * vert * Time.deltaTime * 10.0f);
+			Vector3 moveVector = (transform.forward * vert * Time.deltaTime * 10.0f);
+			controller.Move(moveVector);
 			transform.Rotate(0f, hori * 2f, 0f);
+			movement += moveVector.z;
+			Debug.Log(movement);
 		}
 
 		if(Input.GetKeyDown(KeyCode.E)){
 			otherCamera.enabled = true;
 			Vector3 mainBody = otherCamera.transform.parent.gameObject.transform.position;
-			mainBody.z += movement;
+			mainBody.z += movement / 2;
 			otherCamera.transform.parent.gameObject.transform.position = mainBody;
 			thisCamera.enabled = false;
 		}
