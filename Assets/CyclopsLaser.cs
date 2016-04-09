@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.VR;
 
 public class CyclopsLaser : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class CyclopsLaser : MonoBehaviour {
 	void Start () {
 		otherCamera.enabled = false;
 		thisCamera.enabled = true;
+		VRSettings.renderScale = 0.5f;
 	}
 	
 	// Update is called once per frame

@@ -4,11 +4,10 @@ using System.Collections;
 public class CharacterMovement : MonoBehaviour {
 
 	CharacterController controller;
-	Camera camera;
+	public Camera camera;
 	// Use this for initialization
 	void Start () {
 		controller = GetComponent<CharacterController>();
-		camera = Camera.main;
 	}
 	
 	// Update is called once per frame

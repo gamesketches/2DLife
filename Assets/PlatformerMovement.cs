@@ -52,7 +52,6 @@ public class PlatformerMovement : MonoBehaviour {
 			controller.Move(moveVector);
 			transform.Rotate(0f, hori * 2f, 0f);
 			movement += moveVector.z;
-			Debug.Log(movement);
 		}
 
 		if(Input.GetKeyDown(KeyCode.E)){
