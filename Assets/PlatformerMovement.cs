@@ -6,11 +6,14 @@ public class PlatformerMovement : MonoBehaviour {
 	CharacterController controller;
 	public bool GravityY = true;
 	private Vector3 jumpVector;
+	private float movement;
 	public float jumpSpeed;
 	public Camera otherCamera;
+	public Camera thisCamera;
 	// Use this for initialization
 	void Start () {
 		controller = GetComponent<CharacterController>();
+		movement = 0;
 	}
 	
 	// Update is called once per frame
@@ -22,6 +25,7 @@ public class PlatformerMovement : MonoBehaviour {
 		if(GravityY) {
 			Vector3 moveVector = (vert * Camera.main.transform.forward * Time.deltaTime * 2f + Physics.gravity);
 			controller.Move(moveVector + jumpVector);
+			movement+= moveVector.z;
 			Debug.Log(jumpVector);
 			if(!controller.isGrounded) {
 				jumpVector.y -= 1f * Time.deltaTime;
@@ -39,7 +43,11 @@ public class PlatformerMovement : MonoBehaviour {
 		}
 
 		if(Input.GetKeyDown(KeyCode.E)){
-			Debug.Log("Back to 3d space");
+			otherCamera.enabled = true;
+			Vector3 mainBody = otherCamera.transform.parent.gameObject.transform.position;
+			mainBody.z += movement;
+			otherCamera.transform.parent.gameObject.transform.position = mainBody;
+			thisCamera.enabled = false;
 		}
 	}
 }
