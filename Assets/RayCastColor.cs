@@ -20,6 +20,9 @@ public class RayCastColor : MonoBehaviour {
 			myRenderer.material.color = hit.collider.gameObject.GetComponent<Renderer>().material.color;
 			light.intensity = 1f - (hit.distance / 30f);
 		}
+		else {
+			myRenderer.material.color = new Color(8f, 193f, 255f);
+		}
 		Debug.DrawRay(transform.position, transform.forward * 100f);
 	}
 }

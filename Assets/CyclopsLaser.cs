@@ -23,7 +23,7 @@ public class CyclopsLaser : MonoBehaviour {
 				Input.GetKeyDown(KeyCode.E)) {
 				otherCamera.enabled = true;
 				thisCamera.enabled = false;
-				gameObject.transform.Rotate(new Vector3(0, 180, 0));
+				gameObject.transform.parent.transform.Rotate(new Vector3(0, 180, 0));
 			}
 		}
 		Debug.DrawRay(transform.position, transform.forward * rayLength);

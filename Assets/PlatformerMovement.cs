@@ -26,6 +26,9 @@ public class PlatformerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(!thisCamera.enabled) {
+			return;
+		}
 		float hori = Input.GetAxis("Horizontal");
 		float vert = Input.GetAxis("Vertical");
 
